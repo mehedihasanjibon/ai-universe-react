@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import SingleData from '../SingleData/SingleData';
+import Button from '../Button/Button';
+import { space } from 'postcss/lib/list';
 
 const Card = (props) => {
     const [data, setData] = useState([]);
+    const [showAll, setShowAll] = useState(false);
+
+    const handleShowAll = () => {
+        setShowAll(true);
+    }
 
     useEffect(()=> {
         const loadData = async() => {
@@ -25,7 +32,7 @@ const Card = (props) => {
                     })
                 } */}
                 {
-                    data.map((singleData) => (
+                    data?.slice(0, showAll ? 12 : 6).map((singleData) => (
                         <SingleData
                             key={singleData.id}
                             singleData={singleData}
@@ -33,6 +40,12 @@ const Card = (props) => {
                     ))
                 }
             </div>
+
+            {!showAll && (
+                <span onClick={handleShowAll}>
+                    <Button> See More </Button>
+                </span>
+            )}
         </>
     );
 };
