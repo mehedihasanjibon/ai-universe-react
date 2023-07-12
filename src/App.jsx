@@ -1,9 +1,12 @@
 import React from 'react';
+import Header from './component/Header/Header';
+import Button from './component/Button/Button';
 
 const App = () => {
   return (
     <div>
-      <h1> This is my heading </h1>
+      <Header></Header>
+      <Button> Sort By Date </Button>
     </div>
   );
 };
