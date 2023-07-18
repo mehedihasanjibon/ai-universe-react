@@ -3,7 +3,12 @@ import React from 'react';
 const SingleData = (props) => {
     // console.log(props.singleData);
     // console.log(props);
-    const {id,image, features,published_in,name} = props?.singleData;
+    const { id,image, features,published_in,name } = props?.singleData;
+
+    const handleId = (id) => {
+        console.log(id);
+    }
+
     return (
         <div>
             <div className="card w-full bg-base-100 shadow-xl">
@@ -25,10 +30,16 @@ const SingleData = (props) => {
                         </span>
                         <p>{published_in}</p>
                     </div>
-                    <div className='cursor-pointer'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                        </svg>
+                    <div>
+                        <label onClick={()=>{
+                            window.my_modal_4.showModal(),
+                            props.setUniqueId(id);
+                        }}
+                        className='cursor-pointer'>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                            </svg>
+                        </label>
                     </div>
                 </div>
             </div>

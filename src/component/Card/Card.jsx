@@ -2,14 +2,25 @@ import React, { useEffect, useState } from 'react';
 import SingleData from '../SingleData/SingleData';
 import Button from '../Button/Button';
 import { space } from 'postcss/lib/list';
+import Modal from '../Modal/Modal';
 
 const Card = (props) => {
     const [data, setData] = useState([]);
+    const [singleData, setSingleData] = useState({});
     const [showAll, setShowAll] = useState(false);
+    const [uniqueId, setUniqueId] = useState(null);
+    // console.log(uniqueId);
 
     const handleShowAll = () => {
         setShowAll(true);
     }
+
+    useEffect(()=> {
+        console.log('Hello form useEffect');
+        fetch(`https://openapi.programming-hero.com/api/ai/tool/${uniqueId}`)
+        .then(res => res.json())
+        .then(data => setSingleData(data.data))
+    },[uniqueId]);
 
     useEffect(()=> {
         const loadData = async() => {
@@ -36,6 +47,7 @@ const Card = (props) => {
                         <SingleData
                             key={singleData.id}
                             singleData={singleData}
+                            setUniqueId={setUniqueId}
                         ></SingleData>
                     ))
                 }
@@ -46,6 +58,7 @@ const Card = (props) => {
                     <Button> See More </Button>
                 </span>
             )}
+            <Modal singleData={singleData}></Modal>
         </>
     );
 };
